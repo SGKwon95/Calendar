@@ -12,8 +12,8 @@ Vue.use(cookies)
 Vue.use(vuex)
 
 function init () {
-  // const savedToken = null
-  const savedToken = cookies.get('accessToken')
+  const savedToken = null
+  // const savedToken = cookies.get('accessToken')
 
   if (savedToken) {
     return store.dispatch('loginByToken', savedToken)

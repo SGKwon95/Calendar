@@ -8,7 +8,9 @@ const routes = [
   {
     path: '/',
     name: 'StartPage',
-    component: StartPage
+    components: {
+      default: StartPage
+    }
   }
 ]
 

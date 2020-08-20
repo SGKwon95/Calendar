@@ -1,4 +1,5 @@
 <template>
-  <v-main>
-  </v-main>
+  <v-content>
+    <router-view/>
+  </v-content>
 </template>
