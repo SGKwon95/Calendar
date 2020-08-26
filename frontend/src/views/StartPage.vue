@@ -1,6 +1,6 @@
 <template>
   <div class="startpage">
-    <todo-app/>
+    <layout/>
   </div>
 </template>
 
@@ -8,14 +8,14 @@
 // @ is an alias to /src
 // 시작 페이지
 /* eslint-disable no-unused-vars */
-import TodoApp from '@/components/TodoApp'
 import Vue from 'vue'
 import store from '../store'
+import Layout from '@/components/Layout'
 
 export default {
   name: 'StartPage',
   components: {
-    TodoApp
+    Layout
   }
 }
 </script>
