@@ -1,8 +1,9 @@
 package com.example.Calender.config;
 
-import com.example.demo.security.CustomUserDetailsService;
-import com.example.demo.security.JwtAuthenticationFilter;
-import com.example.demo.security.JwtAuthorizationFilter;
+import com.example.Calender.security.CustomAccessDeniedHandler;
+import com.example.Calender.security.CustomUserDetailsService;
+import com.example.Calender.security.JwtAuthenticationFilter;
+import com.example.Calender.security.JwtAuthorizationFilter;
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

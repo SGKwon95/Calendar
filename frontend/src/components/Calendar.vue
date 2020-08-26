@@ -1,6 +1,6 @@
 <template>
   <div align="center">
-      <h2>{{ calYear }}</h2>
+      <h2>{{ calYear }}</h2><button @click="Today()">Today</button>
       <br>
       <button @click="prevMonth()" class="page-btn">
         ◀
@@ -23,29 +23,45 @@
       </thead>
       <tbody>
         <tr>
-          <td v-for="(i, index) in CalArray[0]" :key=index><a @click="findSchedule(i)">{{ i[2] }}</a></td>
+          <td v-for="(i, index) in CalArray[0]" :key=index>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
+          </td>
         </tr>
         <tr>
-          <td v-for="(i, index) in CalArray[1]" :key=index><a @click="findSchedule(i)">{{ i[2] }}</a></td>
+          <td v-for="(i, index) in CalArray[1]" :key=index>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
+          </td>
         </tr>
         <tr>
-          <td v-for="(i, index) in CalArray[2]" :key=index><a @click="findSchedule(i)">{{ i[2] }}</a></td>
+          <td v-for="(i, index) in CalArray[2]" :key=index>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
+          </td>
         </tr>
         <tr>
-          <td v-for="(i, index) in CalArray[3]" :key=index><a @click="findSchedule(i)">{{ i[2] }}</a></td>
+          <td v-for="(i, index) in CalArray[3]" :key=index>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
+          </td>
         </tr>
         <tr v-show="CalArray[4][0][2] !== ''">
           <td v-for="(i, index) in CalArray[4]" :key=index v-show="i[0][2] !== ''">
-          <a @click="findSchedule(i)">
-            {{ i[2] }}
-          </a>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
           </td>
         </tr>
         <tr v-show="CalArray[5][0][2] !== ''">
           <td v-for="(i, index) in CalArray[5]" :key=index v-show="i[0][2] !== ''">
-          <a @click="findSchedule(i)">
-            {{ i[2] }}
-          </a>
+            <a @click="findSchedule()" class="cell">
+              {{ i[2] }}
+            </a>
           </td>
         </tr>
       </tbody>
@@ -152,6 +168,15 @@ export default {
         }
       }
       this.CalArray = arr
+    },
+    findSchedule () {
+      alert('asdf')
+    },
+    Today () {
+      this.year = new Date().getFullYear()
+      this.month = new Date().getMonth()
+      this.start = new Date(this.year, this.month, 1).getDay()
+      this.renderCal()
     }
   }
 }

@@ -2,9 +2,6 @@
   <div class="calendarpage">
     <layout/>
     <calendar :schedule-array="scheduleArray"/>
-    <tr>
-      <td v-for="i in scheduleArray" :key=i.id>{{ i }}</td>
-    </tr>
   </div>
 </template>
 

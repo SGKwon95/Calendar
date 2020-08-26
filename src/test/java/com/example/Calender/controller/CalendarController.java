@@ -19,7 +19,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class CalendarController {
     @Autowired
-    CalendarService service;
+    private CalendarService service;
 
     @GetMapping("")
     public ResponseEntity<List<Calendar>> list() throws Exception {
