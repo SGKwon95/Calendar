@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import StartPage from '../views/StartPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import LoginPage from '../views/LoginPage.vue'
+import ScheduleManagePage from '../views/ScheduleManagePage.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,13 @@ const routes = [
     name: 'LoginPage',
     components: {
       default: LoginPage
+    }
+  },
+  {
+    path: '/ScheduleManagePage',
+    name: 'ScheduleManagePage',
+    components: {
+      default: ScheduleManagePage
     }
   }
 ]

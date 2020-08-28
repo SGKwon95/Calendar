@@ -1,0 +1,4 @@
+<template>
+  <table>
+  </table>
+</template>

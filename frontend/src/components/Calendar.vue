@@ -24,42 +24,42 @@
       <tbody>
         <tr>
           <td v-for="(i, index) in CalArray[0]" :key=index>
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
         </tr>
         <tr>
           <td v-for="(i, index) in CalArray[1]" :key=index>
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
         </tr>
         <tr>
           <td v-for="(i, index) in CalArray[2]" :key=index>
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
         </tr>
         <tr>
           <td v-for="(i, index) in CalArray[3]" :key=index>
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
         </tr>
         <tr v-show="CalArray[4][0][2] !== ''">
           <td v-for="(i, index) in CalArray[4]" :key=index v-show="i[0][2] !== ''">
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
         </tr>
         <tr v-show="CalArray[5][0][2] !== ''">
           <td v-for="(i, index) in CalArray[5]" :key=index v-show="i[0][2] !== ''">
-            <a @click="findSchedule()" class="cell">
+            <a @click="findSchedule(i)">
               {{ i[2] }}
             </a>
           </td>
@@ -73,10 +73,9 @@
 /* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import store from '../store'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
-  components: {
-  },
   data: function () {
     return {
       year: 0,
@@ -95,15 +94,14 @@ export default {
   },
   props: {
     scheduleArray: {
-      type: Array,
-      required: true
+      type: Array
     }
   },
   created () {
     this.year = new Date().getFullYear()
     this.month = new Date().getMonth()
     this.start = new Date(this.year, this.month, 1).getDay()
-    this.renderCal()
+    this.render()
   },
   computed: {
     calMonth () {
@@ -111,9 +109,38 @@ export default {
     },
     calYear () {
       return this.year
-    }
+    },
+    /* sliceScheduleArray () {
+      const y = '' + this.year
+      const m = (this.month < 10) ? '0' + (this.month + 1) : '' + (this.month + 1)
+      const dateformat = y + '-' + m
+      var start = -1
+      var end = -1
+      for (var i = 0; i < this.scheduleArray.length; i++) {
+        if (this.scheduleArray[i].date.substring(0, 7) === dateformat) {
+          start = i
+          break
+        }
+      }
+      if (start !== -1) {
+        for (var j = start; j < this.scheduleArray.length; j++) {
+          end = j
+          if (this.scheduleArray[j].date.substring(0, 7) !== dateformat) {
+            break
+          }
+        }
+        alert(this.scheduleArray)
+        return this.scheduleArray.slice(start, end)
+      } else return this.scheduleArray
+    }, */
+    ...mapState([
+      'schedule'
+    ])
   },
   methods: {
+    ...mapActions([
+      'sendDate'
+    ]),
     prevMonth () {
       if (this.month === 0) {
         this.month = 11
@@ -122,7 +149,7 @@ export default {
         this.month -= 1
       }
       this.start = new Date(this.year, this.month, 1).getDay()
-      this.renderCal()
+      this.render()
     },
     nextMonth () {
       if (this.month === 11) {
@@ -132,9 +159,9 @@ export default {
         this.month += 1
       }
       this.start = new Date(this.year, this.month, 1).getDay()
-      this.renderCal()
+      this.render()
     },
-    renderCal () {
+    render () {
       this.init()
       if (this.year % 4 === 0 && (this.year % 100 !== 0 || this.year % 400 === 0)) {
         this.dayArray[1] = 29
@@ -169,14 +196,14 @@ export default {
       }
       this.CalArray = arr
     },
-    findSchedule () {
-      alert('asdf')
+    findSchedule (data) {
+      this.$store.dispatch('sendDate', data)
     },
     Today () {
       this.year = new Date().getFullYear()
       this.month = new Date().getMonth()
       this.start = new Date(this.year, this.month, 1).getDay()
-      this.renderCal()
+      this.render()
     }
   }
 }

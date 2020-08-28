@@ -1,7 +1,10 @@
 <template>
   <div class="calendarpage">
-    <layout/>
-    <calendar :schedule-array="scheduleArray"/>
+    <layout>
+      <template #content>
+        <calendar/>
+      </template>
+    </layout>
   </div>
 </template>
 
@@ -20,20 +23,19 @@ export default {
     Calendar,
     Layout
   },
-  data () {
-    return {
-      scheduleArray: []
-    }
-  },
   created () {
-    axios.get('http://localhost:9999/schedule')
+    // 나중에 다른 곳으로 옮기자
+    /* axios.get('http://localhost:9999/schedule')
       .then(res => {
-        console.log(res)
+        console.log('axios로 데이터 불러오기 성공. data=', res)
         this.scheduleArray = res.data
       })
       .catch(err => {
         console.log(err)
       })
+    */
+  },
+  methods: {
   }
 }
 </script>

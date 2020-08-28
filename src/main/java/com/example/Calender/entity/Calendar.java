@@ -31,4 +31,12 @@ public class Calendar {
     private int contentId;
     private Date date;
     private String content;
+
+    public Calendar(Date date)
+    {
+        this.content = "";
+        this.contentId = -1;
+        this.date = date;
+    }
+    public Calendar() {}
 }

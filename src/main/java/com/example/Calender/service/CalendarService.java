@@ -9,5 +9,5 @@ public interface CalendarService {
     public void removeTodo(Calendar calendar) throws Exception;
     public Calendar readTodo(Calendar calendar) throws Exception;
     public void modifyTodo(Calendar calendar) throws Exception;
-    public List<Calendar> todoList() throws Exception;
+    public List<Calendar> todoList(String date) throws Exception;
 }

@@ -2,11 +2,13 @@ package com.example.Calender.service;
 
 import com.example.Calender.entity.Calendar;
 import com.example.Calender.repository.CalendarRepository;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Log
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
@@ -34,7 +36,7 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public List<Calendar> todoList() throws Exception {
-        return calendarRepository.list();
+    public List<Calendar> todoList(String df) throws Exception {
+        return calendarRepository.list(df);
     }
 }

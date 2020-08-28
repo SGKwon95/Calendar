@@ -76,9 +76,11 @@ public class CalendarRepository {
         );
     }
 
-    public List<Calendar> list() throws Exception {
+    public List<Calendar> list(String df) throws Exception {
+        String query = "select content, date, id from calendar " +
+                "where date like ? order by id";
         List<Calendar> results = jdbcTemplate.query(
-                "select * from calendar", new RowMapper<Calendar>() {
+                query, new RowMapper<Calendar>() {
                     @Override
                     public Calendar mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Calendar cal = new Calendar();
@@ -87,8 +89,12 @@ public class CalendarRepository {
                         cal.setContentId(rs.getInt("id"));
                         return cal;
                     }
-                }
+                }, "%"+df+"%"
         );
+
+        if(results.isEmpty())
+            results.add(new Calendar(new SimpleDateFormat("yyyy-MM-dd").parse(df)));
+
         return results;
     }
 }

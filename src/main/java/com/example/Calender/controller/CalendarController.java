@@ -6,10 +6,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +18,9 @@ public class CalendarController {
     @Autowired
     private CalendarService service;
 
-    @GetMapping("")
-    public ResponseEntity<List<Calendar>> list() throws Exception {
-        log.info("등록된 스케줄 불러오기");
+    @GetMapping("/{df}")
+    public ResponseEntity<List<Calendar>> searchTodo(@PathVariable String df) throws Exception {
 
-        return new ResponseEntity<>(service.todoList(), HttpStatus.OK);
+        return new ResponseEntity<>(service.todoList(df), HttpStatus.OK);
     }
-
 }
