@@ -1,14 +1,16 @@
 <template>
   <div align="center">
-      <h2>{{ calYear }}</h2><button @click="Today()">Today</button>
-      <br>
+      <h1>{{ thisYear }}년
       <button @click="prevMonth()" class="page-btn">
         ◀
       </button>
-      &nbsp; &nbsp; <b>{{ calMonth+1 }}월</b> &nbsp; &nbsp;
+      &nbsp; &nbsp; <b>{{ thisMonth }}월</b> &nbsp; &nbsp;
       <button @click="nextMonth()" class="page-btn">
          ▶
-      </button>
+      </button> &emsp;
+      <v-btn rounded color="teal accent-3" dark @click="setToday">Today</v-btn>
+      </h1>
+      <p></p>
       <p></p>
       <thead>
         <tr>
@@ -73,7 +75,7 @@
 /* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import store from '../store'
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data: function () {
@@ -92,11 +94,6 @@ export default {
       start: 0
     }
   },
-  props: {
-    scheduleArray: {
-      type: Array
-    }
-  },
   created () {
     this.year = new Date().getFullYear()
     this.month = new Date().getMonth()
@@ -104,38 +101,12 @@ export default {
     this.render()
   },
   computed: {
-    calMonth () {
-      return this.month
-    },
-    calYear () {
+    thisYear () {
       return this.year
     },
-    /* sliceScheduleArray () {
-      const y = '' + this.year
-      const m = (this.month < 10) ? '0' + (this.month + 1) : '' + (this.month + 1)
-      const dateformat = y + '-' + m
-      var start = -1
-      var end = -1
-      for (var i = 0; i < this.scheduleArray.length; i++) {
-        if (this.scheduleArray[i].date.substring(0, 7) === dateformat) {
-          start = i
-          break
-        }
-      }
-      if (start !== -1) {
-        for (var j = start; j < this.scheduleArray.length; j++) {
-          end = j
-          if (this.scheduleArray[j].date.substring(0, 7) !== dateformat) {
-            break
-          }
-        }
-        alert(this.scheduleArray)
-        return this.scheduleArray.slice(start, end)
-      } else return this.scheduleArray
-    }, */
-    ...mapState([
-      'schedule'
-    ])
+    thisMonth () {
+      return this.month + 1
+    }
   },
   methods: {
     ...mapActions([
@@ -197,9 +168,10 @@ export default {
       this.CalArray = arr
     },
     findSchedule (data) {
+      console.log('Calendar.vue에서 findSchedule 호출, data = ', data)
       this.$store.dispatch('sendDate', data)
     },
-    Today () {
+    setToday () {
       this.year = new Date().getFullYear()
       this.month = new Date().getMonth()
       this.start = new Date(this.year, this.month, 1).getDay()
@@ -213,5 +185,6 @@ export default {
   table { border-collapse: separate; table-layout: fixed; border: 1px solid #fff; border-spacing: 3px; text-align: center; line-height: 1.5; margin: 20px 10px;}
   th { width: 300px; border: 1px solid #fff; padding: 10px; font-weight: bold; vertical-align: top; color: #fff; background: #ce4869 ;}
   td { width: 300px; height: 150px; border: 1px solid #fff; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc; background: #eee;}
-  h2 { font-size: x-large }
+  h2 { font-size: x-large; }
+  h1 { font-size: xx-large;}
 </style>

@@ -1,6 +1,7 @@
 export const ADD_TODO = 'ADD_TODO'
 export const SEARCH_TODO = 'SEARCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
+export const GET_MOVIE_LIST = 'GET_MOVIE_LIST'
 
 // For Login & Logout
 export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN'

@@ -2,13 +2,11 @@ package com.example.Calender.service;
 
 import com.example.Calender.entity.Calendar;
 import com.example.Calender.repository.CalendarRepository;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Log
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
@@ -21,13 +19,8 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public void removeTodo(Calendar calendar) throws Exception {
-        calendarRepository.removeTodo(calendar);
-    }
-
-    @Override
-    public Calendar readTodo(Calendar calendar) throws Exception {
-        return calendarRepository.readTodo(calendar);
+    public void removeTodo(Long todoNo) throws Exception {
+        calendarRepository.removeTodo(todoNo);
     }
 
     @Override

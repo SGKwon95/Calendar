@@ -4,6 +4,8 @@ import StartPage from '../views/StartPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import ScheduleManagePage from '../views/ScheduleManagePage.vue'
+import SignUpPage from '../views/SignUpPage.vue'
+import MoviePage from '../views/MoviePage.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +36,20 @@ const routes = [
     name: 'ScheduleManagePage',
     components: {
       default: ScheduleManagePage
+    }
+  },
+  {
+    path: '/SignUpPage',
+    name: 'SignUpPage',
+    components: {
+      default: SignUpPage
+    }
+  },
+  {
+    path: '/MoviePage',
+    name: 'MoivePage',
+    components: {
+      default: MoviePage
     }
   }
 ]
