@@ -1,5 +1,5 @@
-# Calender
-Calender using firebase and vue.js
+# Calendar
+Calendar using firebase and vue.js
 
 and
 
