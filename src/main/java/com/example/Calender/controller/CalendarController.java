@@ -22,7 +22,7 @@ public class CalendarController {
     private CalendarService service;
 
     @GetMapping("/{df}")
-    public ResponseEntity<List<Calendar>> searchTodo(@PathVariable String df) throws Exception {
+    public ResponseEntity<List<Calendar>> searchTodo(@PathVariable("df") String df) throws Exception {
         log.info("toRefresh(), df = "+df);
         return new ResponseEntity<>(service.todoList(df), HttpStatus.OK);
     }

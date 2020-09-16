@@ -3,18 +3,19 @@ package com.example.Calender.service;
 import com.example.Calender.entity.Member;
 import com.example.Calender.entity.MemberAuth;
 import com.example.Calender.repository.MemberRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.java.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Log
 @Service
 public class MemberServiceImpl implements MemberService {
-    static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+    
 
     @Autowired
     private MemberRepository repository;
