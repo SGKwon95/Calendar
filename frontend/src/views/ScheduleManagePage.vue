@@ -56,7 +56,8 @@ export default {
   },
   computed: {
     ...mapState({
-      scheduleList: state => state.schedule
+      scheduleList: state => state.schedule,
+      userNo: state => state.myinfo.userNo
     }),
     thisYear () {
       return this.scheduleList[0].dateString.substring(0, 4)
@@ -85,8 +86,9 @@ export default {
         this.dateString = this.scheduleList[0].dateString
         for (var i = 0; i < this.newSchedule.length; i++) {
           this.content = this.newSchedule[i]
-          const { content, dateString } = this
-          await axios.post('http://localhost:7777/schedule', { content, dateString })
+          const { content, dateString, userNo } = this
+          console.log('scheduleManagePage in onSubmit(), userNo=', userNo)
+          await axios.post('http://localhost:7777/schedule', { content, dateString, userNo })
             .then(res => {
               console.log('저장 성공, data = ', res)
             })

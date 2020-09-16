@@ -17,10 +17,12 @@ public class Calendar {
         this.contentId = -1;
         this.date = new Date();
         this.dateString = df;
+        this.userNo = -1;
     }
 
     private int contentId;
     private Date date;
     private String content;
     private String dateString;
+    private long userNo;
 }

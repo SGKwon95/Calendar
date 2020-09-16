@@ -23,13 +23,14 @@ export default {
     var reload = true
     dispatch('Refresh', { df, reload })
   },
-  deleteSchedule ({ dispatch }, payload) {
+  deleteSchedule ({ dispatch, state }, payload) {
     const todoNo = payload.todoNo
     const df = payload.dateString
     console.log('todoNo = ', todoNo)
     console.log('df = ', df)
+    console.log('userNo = ', state.myinfo.userNo)
     var reload = false
-    axios.get(`http://localhost:7777/schedule/${df}/${todoNo}`)
+    axios.get(`http://localhost:7777/schedule/remove/${df}/${todoNo}/${state.myinfo.userNo}`)
       .then(res => {
         console.log('delete complete')
         dispatch('Refresh', { df, reload })
@@ -38,9 +39,8 @@ export default {
         console.log(err)
       })
   },
-  Refresh ({ commit }, payload) {
-    console.log('Refresh, df=', payload.df)
-    axios.get(`http://localhost:7777/schedule/${payload.df}`)
+  Refresh ({ state, commit }, payload) {
+    axios.get(`http://localhost:7777/schedule/search/${payload.df}/${state.myinfo.userNo}`)
       .then(res => {
         commit(SEARCH_TODO, res.data)
         if (payload.reload) router.push('ScheduleManagePage')
@@ -63,6 +63,7 @@ export default {
       return axios.get('http://localhost:7777/users/myinfo')
     }).then(res => {
       console.log('After Get Auth Info')
+      console.log(res.data)
       commit(SET_MY_INFO, res.data)
     })
   },
@@ -88,7 +89,7 @@ export default {
         commit(GET_MOVIE_LIST, res.data)
       })
       .catch(err => {
-        alert('불러오기 실패')
+        alert('불러오기 실패, python server를 구동시키세요.')
         console.log(err)
       })
   }

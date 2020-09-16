@@ -63,8 +63,6 @@ export default {
       if (this.userid !== '') {
         if (this.password !== '') {
           const { userid, password } = this
-          console.log('id = ', this.userid)
-          console.log('pw = ', this.password)
           this.$emit('onSubmit', { userid, password })
         } else {
           alert('패스워드를 입력하세요.')

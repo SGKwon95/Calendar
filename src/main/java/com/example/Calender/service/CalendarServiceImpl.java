@@ -19,8 +19,8 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public void removeTodo(Long todoNo) throws Exception {
-        calendarRepository.removeTodo(todoNo);
+    public void removeTodo(Long todoNo, Long userNo) throws Exception {
+        calendarRepository.removeTodo(todoNo, userNo);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public List<Calendar> todoList(String df) throws Exception {
-        return calendarRepository.list(df);
+    public List<Calendar> todoList(String df, Long userNo) throws Exception {
+        return calendarRepository.list(df, userNo);
     }
 }

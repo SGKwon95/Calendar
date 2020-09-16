@@ -22,14 +22,15 @@ public class CalendarRepository {
     private JdbcTemplate jdbcTemplate;
 
     public void makeTodo(Calendar calendar)throws Exception{
-        String query = "insert into calendar(date, content) values(?, ?)";
+        String query = "insert into calendar(date, content, userNo) values(?, ?, ?)";
         log.info(calendar.getDateString());
-        jdbcTemplate.update(query,calendar.getDateString(),calendar.getContent());
+        jdbcTemplate.update(query,calendar.getDateString(),calendar.getContent(),calendar.getUserNo());
     }
 
-    public void removeTodo(Long todoNo) throws Exception {
+    public void removeTodo(Long todoNo, Long userNo) throws Exception {
         log.info("todoNo="+todoNo);
-        jdbcTemplate.update("delete from calendar where id = ?", todoNo);
+        log.info("userNo="+userNo);
+        jdbcTemplate.update("delete from calendar where id = ? and userNo = ?", todoNo, userNo);
     }
 
     public void modifyTodo(Calendar calendar) throws Exception {
@@ -44,9 +45,9 @@ public class CalendarRepository {
         );
     }
 
-    public List<Calendar> list(String df) throws Exception {
+    public List<Calendar> list(String df, Long userNo) throws Exception {
         String query = "select content, date, id from calendar " +
-                "where date like ? order by id";
+                "where date like ? and userNo=? order by id";
         List<Calendar> results = jdbcTemplate.query(
                 query, new RowMapper<Calendar>() {
                     @Override
@@ -58,7 +59,7 @@ public class CalendarRepository {
                         cal.setDateString(df);
                         return cal;
                     }
-                }, "%"+df+"%"
+                }, "%"+df+"%",userNo
         );
         
         results.add(0, new Calendar(df));

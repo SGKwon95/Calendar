@@ -21,10 +21,12 @@ public class CalendarController {
     @Autowired
     private CalendarService service;
 
-    @GetMapping("/{df}")
-    public ResponseEntity<List<Calendar>> searchTodo(@PathVariable("df") String df) throws Exception {
-        log.info("toRefresh(), df = "+df);
-        return new ResponseEntity<>(service.todoList(df), HttpStatus.OK);
+    @GetMapping("/search/{df}/{userNo}")
+    public ResponseEntity<List<Calendar>> searchTodo(
+        @PathVariable String df,
+        @PathVariable long userNo) throws Exception {
+        log.info("from Refresh() in vue, df = "+df);
+        return new ResponseEntity<>(service.todoList(df,userNo), HttpStatus.OK);
     }
 
     @PostMapping("")
@@ -36,12 +38,14 @@ public class CalendarController {
         return new ResponseEntity<>(calendar, HttpStatus.OK);
     }
     
-    @GetMapping("/{df}/{todoNo}")
+    @GetMapping("/remove/{df}/{todoNo}/{userNo}")
     public ResponseEntity<Void> remove(
             @PathVariable String df,
-            @PathVariable Long todoNo) throws Exception {
+            @PathVariable Long todoNo,
+            @PathVariable Long userNo) throws Exception {
         log.info("1. remove, todoNo = "+todoNo);
-        service.removeTodo(todoNo);
+        log.info("1. remove, todoNo = "+userNo);
+        service.removeTodo(todoNo, userNo);
 
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
