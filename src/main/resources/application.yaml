@@ -32,3 +32,19 @@ logging:
           AuditingFilter: DEBUG
           SecurityChecker: DEBUG
           MessageService: DEBUG
+
+app:
+  firebase-configuration-file:
+    calenderapp-c1fe5-firebase-adminsdk-840v0-be50a74844.json
+  notifications.defaults:
+    topic:
+      "common"
+    title:
+      "topic-hello"
+    message:
+      "Sending test message \uD83D\uDE42"
+    token:
+      "AAAAxt2H3lc:APA91bHREx1wEdQOXpnM8P47WEjGyfFk5NmRR7vkSmtrvRUIuOP3jU05Gi2Cf0YKBjj_UaXlMbElnFPvVT8Najh3aELYR_4iGWU5ukojVdQtw3SSysUp9g6lrAW9i4VlK4KEbt01qEw_"
+    payloadMessageId:
+      "123"
+    payloadData: "Hello. This is payload content."

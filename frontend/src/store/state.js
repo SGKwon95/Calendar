@@ -2,5 +2,6 @@ export default {
   schedule: [],
   accessToken: '',
   myinfo: null,
-  movie: []
+  movie: [],
+  id: ''
 }

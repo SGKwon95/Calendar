@@ -174,7 +174,7 @@ export default {
     setToday () {
       this.year = new Date().getFullYear()
       this.month = new Date().getMonth()
-      this.start = new Date(this.year, this.month, 1).getDay()
+      this.start = new Date(this.year, this.month, 1).getDay() // 매월 1일의 요일을 가져온다
       this.render()
     }
   }

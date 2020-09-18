@@ -7,7 +7,8 @@ import {
   SET_MY_INFO,
   DESTROY_ACCESS_TOKEN,
   DESTROY_MY_INFO,
-  GET_MOVIE_LIST
+  GET_MOVIE_LIST,
+  BRING_ID
 } from './mutation-types'
 
 import axios from 'axios'
@@ -65,6 +66,7 @@ export default {
       console.log('After Get Auth Info')
       console.log(res.data)
       commit(SET_MY_INFO, res.data)
+      commit(BRING_ID, payload.userid)
     })
   },
   loginByToken ({ commit }, token) {

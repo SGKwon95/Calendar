@@ -61,24 +61,6 @@ export default {
     thisMonth () {
       return this.currentMonth
     },
-    /*
-    getThisMonthMovieList () { // side-effect-error occured!
-      var start = 0
-      var end = 0
-      for (var i = 0; i < this.movieList.length; i++) {
-        if (Number(this.movieList[i].item.substring(5, 7)) === this.currentMonth) {
-          start = i
-          break
-        }
-      }
-      for (end = start; end < this.movieList.length; end++) {
-        if (Number(this.movieList[end].item.substring(5, 7)) !== this.currentMonth) {
-          break
-        }
-      }
-      return this.movieList.splice(start, end)
-    },
-    */
     ...mapGetters(['isAuthorized'])
   },
   components: {
