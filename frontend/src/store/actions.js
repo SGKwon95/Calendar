@@ -94,5 +94,17 @@ export default {
         alert('불러오기 실패, python server를 구동시키세요.')
         console.log(err)
       })
+  },
+  /* eslint handle-callback-err: "warn" */
+  pushScheduleToPhone (state, payload) {
+    console.log('pushScheduleToPhone')
+    return axios.post('http://localhost:7777/notification', payload)
+      .then(
+        alert('push 알람 전송하였습니다')
+      )
+      .catch(err => {
+        alert('push 알람 전송 실패')
+        console.log(err)
+      })
   }
 }

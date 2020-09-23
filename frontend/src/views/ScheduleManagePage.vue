@@ -10,12 +10,14 @@
           <tr>
             <th class="text-left">Todo List</th>
             <th class="text-left">Complete</th>
+            <th class="text-left">Push to Phone</th>
           </tr>
         </thead>
         <tbody>
             <tr v-for="list in scheduleList" v-bind:key="list.contentId">
               <td v-if="list.contentId !== -1">{{ list.content }}</td>
               <td v-if="list.contentId !== -1"><button @click="deleteSchedule(list.contentId)"><v-icon>mdi-check</v-icon></button></td>
+              <td v-if="list.contentId !== -1"><button @click="pushToPhone(list.content)"><v-icon>mdi-alarm</v-icon></button></td>
             </tr>
             <tr v-for="(list, index) in newSchedule" v-bind:key="index">
               <td>{{ list }}</td>
@@ -57,7 +59,8 @@ export default {
   computed: {
     ...mapState({
       scheduleList: state => state.schedule,
-      userNo: state => state.myinfo.userNo
+      userNo: state => state.myinfo.userNo,
+      token: state => state.phoneToken
     }),
     thisYear () {
       return this.scheduleList[0].dateString.substring(0, 4)
@@ -116,6 +119,13 @@ export default {
     },
     goBack () {
       this.$router.push({ name: 'CalendarPage' })
+    },
+    pushToPhone (content) {
+      const title = this.scheduleList[0].dateString.substring(0, 4) + '년 ' + this.scheduleList[0].dateString.substring(5, 7) + '월 ' + this.scheduleList[0].dateString.substring(8) + '일의 할 일'
+      const message = content
+      const topic = 'Todo'
+      const token = this.token
+      this.$store.dispatch('pushScheduleToPhone', { title, message, topic, token })
     }
   }
 }
