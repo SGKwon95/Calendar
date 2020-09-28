@@ -16,7 +16,7 @@ def scrape_movie(response):
         linkList.append('https://movie.naver.com' + a.get('href'))
         name = tostring(a,pretty_print=True, encoding='euc-kr').decode('euc-kr')
         start = name.find('>') + 1
-        end = name.find('</a>', 1)
+        end = name.find('</a>')
         nameList.append(name[start:end])
         
     
